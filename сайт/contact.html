@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Контакты - CV Magzhan</title>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #6366f1;
+      --secondary: #8b5cf6;
+      --dark: #0f172a;
+      --light: #890eee;
+      --text: #1e293b;
+      --text-light: #64748b;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: var(--text);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 30px 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: white;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .nav-links a.active {
+      color: #ffd700;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: white;
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    /* Main Content */
+    .main-content {
+      padding-top: 120px;
+      min-height: 100vh;
+    }
+
+    .page-header {
+      text-align: center;
+      color: white;
+      margin-bottom: 80px;
+    }
+
+    .page-header h1 {
+      font-size: 64px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .page-header p {
+      font-size: 24px;
+      opacity: 0.9;
+    }
+
+    /* Contact Section */
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 80px;
+    }
+
+    /* Contact Form */
+    .contact-form {
+      background: white;
+      border-radius: 30px;
+      padding: 60px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    }
+
+    .contact-form h2 {
+      font-size: 36px;
+      margin-bottom: 30px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .form-group {
+      margin-bottom: 30px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 600;
+      color: var(--text);
+      font-size: 16px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 15px 20px;
+      border: 2px solid #e2e8f0;
+      border-radius: 15px;
+      font-size: 16px;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s;
+      background: #f8fafc;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: white;
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 150px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 15px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Contact Info */
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .info-card {
+      background: white;
+      border-radius: 30px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+      text-align: center;
+    }
+
+    .info-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.15);
+    }
+
+    .info-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    }
+
+    .info-card h3 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: var(--text);
+    }
+
+    .info-card p,
+    .info-card a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    .info-card a:hover {
+      color: var(--primary);
+    }
+
+    /* Social Links */
+    .social-section {
+      background: white;
+      border-radius: 30px;
+      padding: 60px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .social-section h2 {
+      font-size: 36px;
+      margin-bottom: 40px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 40px;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .social-link::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .social-link:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .social-link:hover {
+      transform: translateY(-10px) scale(1.1);
+      box-shadow: 0 20px 50px rgba(102, 126, 234, 0.4);
+    }
+
+    .social-link span {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Map Section */
+    .map-section {
+      background: white;
+      border-radius: 30px;
+      padding: 60px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+      margin-bottom: 80px;
+      text-align: center;
+    }
+
+    .map-section h2 {
+      font-size: 36px;
+      margin-bottom: 40px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .map-placeholder {
+      height: 400px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 40px 0;
+      margin-top: 80px;
+    }
+
+    footer p {
+      margin: 0;
+      opacity: 0.9;
+    }
+
+    /* Form validation styles */
+    .form-group input:invalid:not(:placeholder-shown),
+    .form-group textarea:invalid:not(:placeholder-shown) {
+      border-color: #ef4444;
+    }
+
+    .form-group input:valid:not(:placeholder-shown),
+    .form-group textarea:valid:not(:placeholder-shown) {
+      border-color: #10b981;
+    }
+
+    .error-message {
+      color: #ef4444;
+      font-size: 14px;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .form-group.error .error-message {
+      display: block;
+    }
+
+    /* Accessibility improvements */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .page-header h1 {
+        font-size: 40px;
+      }
+
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-form,
+      .social-section,
+      .map-section {
+        padding: 30px;
+      }
+
+      .nav-links {
+        gap: 15px;
+        font-size: 14px;
+      }
+
+      .mobile-menu-toggle {
+        display: block;
+      }
+
+      nav {
+        position: relative;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        right: 0;
+        background: rgba(102, 126, 234, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 999;
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
+      }
+
+      .nav-links.active {
+        transform: translateX(0);
+      }
+
+      .nav-links li {
+        width: 100%;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 10px;
+        text-align: center;
+        border-radius: 8px;
+        transition: background 0.3s;
+      }
+
+      .nav-links a:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .social-links {
+        gap: 20px;
+      }
+
+      .social-link {
+        width: 80px;
+        height: 80px;
+        font-size: 32px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page-header h1 {
+        font-size: 32px;
+      }
+
+      .contact-form, .social-section, .map-section {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <nav class="container">
+      <a href="main.html" class="logo">Magzhan</a>
+      <button class="mobile-menu-toggle" aria-label="Меню">☰</button>
+      <ul class="nav-links">
+        <li><a href="main.html">Главная</a></li>
+        <li><a href="skills.html">Навыки</a></li>
+        <li><a href="projects.html">Проекты</a></li>
+        <li><a href="contact.html" class="active">Контакты</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="container">
+      <div class="page-header" data-aos="fade-down">
+        <h1>Свяжитесь со мной</h1>
+        <p>Готов к новым проектам и сотрудничеству!</p>
+      </div>
+
+      <!-- Contact Wrapper -->
+      <div class="contact-wrapper">
+        <!-- Contact Form -->
+        <div class="contact-form" data-aos="fade-right">
+          <h2>Отправить сообщение</h2>
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="name">Ваше имя</label>
+              <input type="text" id="name" name="name" required placeholder="Введите ваше имя">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+            </div>
+            <div class="form-group">
+              <label for="subject">Тема</label>
+              <input type="text" id="subject" name="subject" required placeholder="Тема сообщения">
+            </div>
+            <div class="form-group">
+              <label for="message">Сообщение</label>
+              <textarea id="message" name="message" required placeholder="Напишите ваше сообщение здесь..." minlength="10"></textarea>
+              <span class="error-message">Сообщение должно содержать минимум 10 символов</span>
+            </div>
+            <button type="submit" class="submit-btn">Отправить сообщение</button>
+          </form>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="contact-info" data-aos="fade-left">
+          <div class="info-card">
+            <div class="info-icon">📧</div>
+            <h3>Email</h3>
+            <a href="mailto:kassymkhanmagzhan@gmail.com">kassymkhanmagzhan@gmail.com</a>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">📱</div>
+            <h3>Телефон</h3>
+            <a href="tel:+77005704607">+7 (700) 570-46-07</a>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">📍</div>
+            <h3>Адрес</h3>
+            <p>Кентау, Казахстан</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Social Links -->
+      <div class="social-section" data-aos="fade-up">
+        <h2>Социальные сети</h2>
+        <div class="social-links">
+        
+          <a href="https://github.com/StarLightKS" class="social-link" title="GitHub">
+            <span>🔗</span>
+          </a>
+         
+          <a href="https://www.instagram.com/magiistr/?hl=ru" class="social-link" title="Instagram">
+            <span>📷</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Инициализация AOS
+      if (typeof AOS !== 'undefined') {
+        AOS.init({
+          duration: 1000,
+          once: true,
+          offset: 100
+        });
+      }
+
+      // Form validation and submission
+      const form = document.getElementById('contactForm');
+      if (!form) return;
+      
+      const formGroups = form.querySelectorAll('.form-group');
+
+      function validateField(field) {
+        const formGroup = field.closest('.form-group');
+        if (field.checkValidity()) {
+          formGroup.classList.remove('error');
+        } else {
+          formGroup.classList.add('error');
+        }
+      }
+
+      formGroups.forEach(group => {
+        const input = group.querySelector('input, textarea');
+        if (input) {
+          input.addEventListener('blur', function() {
+            validateField(this);
+          });
+          
+          input.addEventListener('input', function() {
+            if (group.classList.contains('error')) {
+              validateField(this);
+            }
+          });
+        }
+      });
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        let isValid = true;
+        formGroups.forEach(group => {
+          const input = group.querySelector('input, textarea');
+          if (input && !input.checkValidity()) {
+            isValid = false;
+            group.classList.add('error');
+          }
+        });
+
+        if (isValid) {
+          // Show success message
+          const submitBtn = form.querySelector('.submit-btn');
+          const originalText = submitBtn.textContent;
+          submitBtn.textContent = 'Отправляется...';
+          submitBtn.disabled = true;
+
+          // Simulate form submission (replace with actual API call)
+          setTimeout(() => {
+            alert('Спасибо за ваше сообщение! Я свяжусь с вами в ближайшее время.');
+            form.reset();
+            formGroups.forEach(group => group.classList.remove('error'));
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+          }, 1000);
+        } else {
+          // Scroll to first error
+          const firstError = form.querySelector('.form-group.error');
+          if (firstError) {
+            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
+      });
+
+      // Mobile menu toggle
+      const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+      const navLinks = document.querySelector('.nav-links');
+      
+      if (mobileMenuToggle && navLinks) {
+        mobileMenuToggle.addEventListener('click', () => {
+          navLinks.classList.toggle('active');
+          const isActive = navLinks.classList.contains('active');
+          mobileMenuToggle.innerHTML = isActive ? '✕' : '☰';
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            mobileMenuToggle.innerHTML = '☰';
+          });
+        });
+
+        document.addEventListener('click', (e) => {
+          if (!navLinks.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+            navLinks.classList.remove('active');
+            mobileMenuToggle.innerHTML = '☰';
+          }
+        });
+      }
+
+      // Update header on scroll with better performance
+      const header = document.querySelector('header');
+      
+      if (header) {
+        window.addEventListener('scroll', () => {
+          const currentScroll = window.scrollY;
+          
+          if (currentScroll > 100) {
+            header.style.background = 'rgba(255, 255, 255, 0.95)';
+            header.style.backdropFilter = 'blur(20px)';
+          } else {
+            header.style.background = 'rgba(255, 255, 255, 0.1)';
+            header.style.backdropFilter = 'blur(10px)';
+          }
+        }, { passive: true });
+      }
+    });
+  </script>
+</body>
+</html>
+

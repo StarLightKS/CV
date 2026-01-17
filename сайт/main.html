@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Главная - CV Magzhan</title>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #6366f1;
+      --secondary: #8b5cf6;
+      --dark: #0f172a;
+      --light: #890eee;
+      --text: #1e293b;
+      --text-light: #64748b;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: var(--text);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 30px 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: white;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .nav-links a.active {
+      color: #ffd700;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: white;
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding-top: 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      top: -250px;
+      right: -250px;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    .hero-content h1 {
+      font-size: 64px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      background: linear-gradient(45deg, #fff, #e0e7ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero-content p {
+      font-size: 24px;
+      margin-bottom: 30px;
+      opacity: 0.9;
+      animation: fadeInUp 1s ease 0.2s both;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 1s ease 0.4s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .btn {
+      padding: 15px 40px;
+      border: none;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: white;
+      color: var(--primary);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+
+    .btn-secondary:hover {
+      background: white;
+      color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    /* Quick Links */
+    .quick-links {
+      padding: 80px 0;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+    }
+
+    .quick-links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .quick-link-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 40px 30px;
+      border-radius: 20px;
+      text-align: center;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+      text-decoration: none;
+      color: white;
+    }
+
+    .quick-link-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.2);
+      border-color: white;
+    }
+
+    .quick-link-card h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .quick-link-card p {
+      opacity: 0.8;
+      font-size: 14px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 40px 0;
+    }
+
+    footer p {
+      margin: 0;
+      opacity: 0.9;
+    }
+
+    /* Accessibility improvements */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 40px;
+      }
+
+      .hero-content p {
+        font-size: 18px;
+      }
+
+      .nav-links {
+        gap: 15px;
+        font-size: 14px;
+      }
+
+      .mobile-menu-toggle {
+        display: block;
+      }
+
+      nav {
+        position: relative;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        right: 0;
+        background: rgba(102, 126, 234, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 999;
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
+      }
+
+      .nav-links.active {
+        transform: translateX(0);
+      }
+
+      .nav-links li {
+        width: 100%;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 10px;
+        text-align: center;
+        border-radius: 8px;
+        transition: background 0.3s;
+      }
+
+      .nav-links a:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .quick-links-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-content h1 {
+        font-size: 32px;
+      }
+
+      .hero-content p {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <nav class="container">
+      <a href="main.html" class="logo">Magzhan</a>
+      <button class="mobile-menu-toggle" aria-label="Меню">☰</button>
+      <ul class="nav-links">
+        <li><a href="main.html" class="active">Главная</a></li>
+        <li><a href="skills.html">Навыки</a></li>
+        <li><a href="projects.html">Проекты</a></li>
+        <li><a href="contact.html">Контакты</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content" data-aos="fade-up">
+        <h1>Привет, я Magzhan</h1>
+        <p>Frontend Developer & UI/UX Designer</p>
+        <div class="hero-buttons">
+          <a href="contact.html" class="btn btn-primary">Связаться</a>
+          <a href="#" class="btn btn-secondary" onclick="downloadCV()">Скачать CV</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Links -->
+  <section class="quick-links">
+    <div class="container">
+      <h2 style="text-align: center; color: white; font-size: 48px; margin-bottom: 20px;" data-aos="fade-up">Исследуйте</h2>
+      <p style="text-align: center; color: white; opacity: 0.8; margin-bottom: 50px; font-size: 18px;" data-aos="fade-up">Узнайте больше обо мне и моих работах</p>
+      <div class="quick-links-grid">
+        <a href="skills.html" class="quick-link-card" data-aos="zoom-in" data-aos-delay="100">
+          <div style="font-size: 48px; margin-bottom: 20px;">💼</div>
+          <h3>Навыки</h3>
+          <p>Технологии и инструменты, которыми я владею</p>
+        </a>
+        <a href="projects.html" class="quick-link-card" data-aos="zoom-in" data-aos-delay="200">
+          <div style="font-size: 48px; margin-bottom: 20px;">🚀</div>
+          <h3>Проекты</h3>
+          <p>Посмотрите мои последние работы</p>
+        </a>
+        <a href="contact.html" class="quick-link-card" data-aos="zoom-in" data-aos-delay="300">
+          <div style="font-size: 48px; margin-bottom: 20px;">📧</div>
+          <h3>Контакты</h3>
+          <p>Свяжитесь со мной для сотрудничества</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Загружаем html2pdf асинхронно
+    let html2pdfLoaded = false;
+    const html2pdfScript = document.createElement('script');
+    html2pdfScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+    html2pdfScript.async = true;
+    html2pdfScript.onload = function() {
+      html2pdfLoaded = true;
+    };
+    html2pdfScript.onerror = function() {
+      console.error('Не удалось загрузить библиотеку html2pdf');
+    };
+    document.head.appendChild(html2pdfScript);
+    
+    // Функция должна быть глобальной для onclick
+    window.downloadCV = function() {
+      // Проверяем, загружена ли библиотека html2pdf
+      if (!html2pdfLoaded || typeof html2pdf === 'undefined') {
+        alert('Библиотека для создания PDF еще не загружена. Пожалуйста, подождите немного и попробуйте снова.');
+        return;
+      }
+      // Создаем HTML контент для PDF
+      const cvContent = `
+       
+      `;
+      
+      // Создаем временный элемент для конвертации
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = cvContent;
+      tempDiv.style.position = 'absolute';
+      tempDiv.style.left = '-9999px';
+      tempDiv.style.width = '210mm'; // A4 width
+      document.body.appendChild(tempDiv);
+      
+      // Настройки для PDF
+      const opt = {
+        margin: [10, 10, 10, 10],
+        filename: 'CV_Magzhan.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+      
+      // Конвертируем в PDF
+      html2pdf().set(opt).from(tempDiv).save().then(() => {
+        // Удаляем временный элемент
+        document.body.removeChild(tempDiv);
+        
+        // Показываем уведомление
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+          position: fixed;
+          top: 100px;
+          right: 20px;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          color: white;
+          padding: 20px 30px;
+          border-radius: 15px;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+          z-index: 10000;
+          font-family: 'Poppins', sans-serif;
+          font-weight: 600;
+          animation: slideIn 0.3s ease;
+        `;
+        notification.textContent = '✅ CV успешно скачано!';
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+          notification.style.animation = 'slideOut 0.3s ease';
+          setTimeout(() => {
+            if (notification.parentNode) {
+              document.body.removeChild(notification);
+            }
+          }, 300);
+        }, 3000);
+        
+        // Добавляем стили для анимации
+        if (!document.getElementById('notification-styles')) {
+          const style = document.createElement('style');
+          style.id = 'notification-styles';
+          style.textContent = `
+            @keyframes slideIn {
+              from {
+                transform: translateX(400px);
+                opacity: 0;
+              }
+              to {
+                transform: translateX(0);
+                opacity: 1;
+              }
+            }
+            @keyframes slideOut {
+              from {
+                transform: translateX(0);
+                opacity: 1;
+              }
+              to {
+                transform: translateX(400px);
+                opacity: 0;
+              }
+            }
+          `;
+          document.head.appendChild(style);
+        }
+      }).catch((error) => {
+        console.error('Ошибка при создании PDF:', error);
+        alert('Произошла ошибка при создании PDF. Пожалуйста, попробуйте снова.');
+        if (tempDiv.parentNode) {
+          document.body.removeChild(tempDiv);
+        }
+        // Re-enable button if error occurs
+        const btn = document.querySelector('.btn-secondary[onclick="downloadCV()"]');
+        if (btn) {
+          btn.disabled = false;
+        }
+      });
+      
+      // Disable button during generation
+      const btn = document.querySelector('.btn-secondary[onclick="downloadCV()"]');
+      if (btn) {
+        btn.disabled = true;
+        setTimeout(() => {
+          btn.disabled = false;
+        }, 3000);
+      }
+    };
+
+    // Ждем полной загрузки DOM
+    document.addEventListener('DOMContentLoaded', function() {
+      // Инициализация AOS
+      if (typeof AOS !== 'undefined') {
+        AOS.init({
+          duration: 1000,
+          once: true,
+          offset: 100
+        });
+      }
+
+      // Mobile menu toggle
+      const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+      const navLinks = document.querySelector('.nav-links');
+      
+      if (mobileMenuToggle && navLinks) {
+        mobileMenuToggle.addEventListener('click', () => {
+          navLinks.classList.toggle('active');
+          const isActive = navLinks.classList.contains('active');
+          mobileMenuToggle.innerHTML = isActive ? '✕' : '☰';
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            mobileMenuToggle.innerHTML = '☰';
+          });
+        });
+
+        document.addEventListener('click', (e) => {
+          if (!navLinks.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+            navLinks.classList.remove('active');
+            mobileMenuToggle.innerHTML = '☰';
+          }
+        });
+      }
+
+      // Update header on scroll with better performance
+      let lastScroll = 0;
+      const header = document.querySelector('header');
+      
+      if (header) {
+        window.addEventListener('scroll', () => {
+          const currentScroll = window.scrollY;
+          
+          if (currentScroll > 100) {
+            header.style.background = 'rgba(255, 255, 255, 0.95)';
+            header.style.backdropFilter = 'blur(20px)';
+          } else {
+            header.style.background = 'rgba(255, 255, 255, 0.1)';
+            header.style.backdropFilter = 'blur(10px)';
+          }
+          
+          lastScroll = currentScroll;
+        }, { passive: true });
+      }
+    });
+  </script>
+</body>
+</html>
+
