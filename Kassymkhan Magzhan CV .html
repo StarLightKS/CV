@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Қасымхан Мағжан - Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f2eb;--bg2:#eee9df;--ink:#1a1812;--ink2:#3d3830;--muted:#8a8070;--accent:#c9460a;--accent2:#1d5c8b;--accent3:#2e7d4f;--gold:#b8860b;--border:rgba(26,24,18,0.12);--card:#fff9f0}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:.6}
+body.pdf-mode nav{display:none!important}
+body.pdf-mode .pdf-hide{display:none!important}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:16px 64px;background:rgba(245,242,235,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);gap:20px}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:17px;color:var(--ink);white-space:nowrap;flex-shrink:0}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:28px;list-style:none;flex:1;justify-content:center}
+.nav-links a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+.lang-switcher{display:flex;gap:3px;background:var(--bg2);border:1px solid var(--border);padding:3px;flex-shrink:0}
+.lang-btn{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;padding:5px 10px;border:none;background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;text-transform:uppercase}
+.lang-btn.active{background:var(--accent);color:#fff}
+.lang-btn:hover:not(.active){color:var(--ink)}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 64px 80px;gap:80px;position:relative}
+.hero::after{content:'';position:absolute;right:0;top:0;bottom:0;width:45%;background:var(--bg2);z-index:-1;clip-path:polygon(8% 0,100% 0,100% 100%,0% 100%)}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--accent)}
+.hero-name{font-family:'DM Serif Display',serif;font-size:clamp(48px,6vw,84px);line-height:1;letter-spacing:-.02em;margin-bottom:24px}
+.hero-name em{display:block;font-style:italic;color:var(--accent)}
+.hero-bio{font-size:16px;color:var(--ink2);max-width:440px;line-height:1.75;margin-bottom:40px}
+.hero-stats{display:flex;gap:40px;margin-bottom:40px}
+.stat{text-align:center}
+.stat-num{font-family:'DM Serif Display',serif;font-size:36px;color:var(--accent);line-height:1;display:block}
+.stat-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.btn{padding:13px 28px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all .2s;display:inline-block;border:none;cursor:pointer}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#a83808;transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--ink);border:1px solid var(--border)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.hero-right{display:flex;flex-direction:column;gap:16px}
+.hero-tag-cloud{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:8px}
+.htag{font-family:'DM Mono',monospace;font-size:11px;padding:7px 16px;border:1px solid var(--border);background:var(--card);color:var(--ink2);letter-spacing:.05em}
+.htag.ai{border-color:var(--accent);color:var(--accent);background:rgba(201,70,10,.06)}
+.htag.space{border-color:var(--accent2);color:var(--accent2);background:rgba(29,92,139,.06)}
+.htag.mun{border-color:var(--accent3);color:var(--accent3);background:rgba(46,125,79,.06)}
+.hero-quote{font-family:'DM Serif Display',serif;font-style:italic;font-size:20px;line-height:1.5;color:var(--ink2);border-left:3px solid var(--accent);padding-left:20px;margin-top:16px}
+
+/* SECTIONS */
+section{padding:96px 64px;position:relative}
+.alt-bg{background:var(--bg2)}
+.section-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.section-label::before{content:'';width:24px;height:1px;background:var(--accent)}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(32px,4vw,52px);line-height:1.1;letter-spacing:-.02em;margin-bottom:56px}
+
+/* ACHIEVEMENTS */
+.achievements-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border)}
+.ach-item{padding:32px 28px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);transition:background .2s;position:relative;overflow:hidden}
+.ach-item:hover{background:var(--card)}
+.ach-item::before{content:attr(data-num);position:absolute;top:12px;right:16px;font-family:'DM Serif Display',serif;font-size:64px;color:var(--border);line-height:1;pointer-events:none;transition:color .2s}
+.ach-item:hover::before{color:rgba(201,70,10,.08)}
+.ach-badge{display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border:1px solid;margin-bottom:12px}
+.badge-gold{border-color:var(--gold);color:var(--gold);background:rgba(184,134,11,.07)}
+.badge-silver{border-color:var(--muted);color:var(--muted);background:rgba(138,128,112,.07)}
+.badge-green{border-color:var(--accent3);color:var(--accent3);background:rgba(46,125,79,.07)}
+.badge-blue{border-color:var(--accent2);color:var(--accent2);background:rgba(29,92,139,.07)}
+.badge-red{border-color:var(--accent);color:var(--accent);background:rgba(201,70,10,.07)}
+.ach-title{font-family:'DM Serif Display',serif;font-size:18px;line-height:1.3;margin-bottom:6px}
+.ach-sub{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.5}
+
+/* PROJECTS */
+.projects-wrap{display:flex;flex-direction:column;border:1px solid var(--border)}
+.project-row{display:grid;grid-template-columns:80px 1fr 200px;align-items:start;border-bottom:1px solid var(--border);padding:40px 0;transition:background .2s}
+.project-row:last-child{border-bottom:none}
+.project-row:hover{background:var(--card)}
+.project-num{font-family:'DM Serif Display',serif;font-size:28px;color:var(--border);padding:4px 0 0 28px;transition:color .2s}
+.project-row:hover .project-num{color:var(--accent)}
+.project-body{padding:0 32px 0 0}
+.project-title{font-family:'DM Serif Display',serif;font-size:26px;line-height:1.2;margin-bottom:10px;letter-spacing:-.01em}
+.project-desc{font-size:14px;color:var(--ink2);line-height:1.7;margin-bottom:16px;max-width:560px}
+.project-stack{display:flex;gap:8px;flex-wrap:wrap}
+.stack-tag{font-family:'DM Mono',monospace;font-size:10px;padding:5px 12px;background:var(--bg2);border:1px solid var(--border);color:var(--ink2);letter-spacing:.05em}
+.stack-tag.ai-tag{background:rgba(201,70,10,.07);border-color:rgba(201,70,10,.2);color:var(--accent)}
+.stack-tag.space-tag{background:rgba(29,92,139,.07);border-color:rgba(29,92,139,.2);color:var(--accent2)}
+.stack-tag.mobile-tag{background:rgba(46,125,79,.07);border-color:rgba(46,125,79,.2);color:var(--accent3)}
+.project-meta{padding:4px 28px 0 0;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.project-type{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-align:right}
+.project-icon{font-size:36px;line-height:1}
+
+/* SKILLS */
+.skills-top{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;margin-bottom:56px}
+.skills-col-title{font-family:'DM Serif Display',serif;font-size:20px;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.skill-chip{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--border);font-size:14px;color:var(--ink2)}
+.skill-icon{width:28px;height:28px;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.activity-list{list-style:none}
+.activity-item{display:flex;gap:14px;align-items:flex-start;padding:13px 0;border-bottom:1px solid var(--border);font-size:13px;color:var(--ink2);line-height:1.5}
+.activity-dot{width:6px;height:6px;border-radius:50%;background:var(--accent3);margin-top:6px;flex-shrink:0}
+
+/* CONTACT */
+.contact-section{background:var(--ink);color:var(--bg);padding:96px 64px}
+.contact-section .section-label{color:var(--accent)}
+.contact-section .section-label::before{background:var(--accent)}
+.contact-section .section-title{color:var(--bg)}
+.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.contact-big{font-family:'DM Serif Display',serif;font-size:clamp(40px,5vw,68px);line-height:1.1;letter-spacing:-.02em;color:var(--bg)}
+.contact-big em{color:var(--accent);font-style:italic}
+.contact-text{font-size:15px;color:rgba(245,242,235,.55);line-height:1.8;margin-bottom:28px}
+.ig-link{display:inline-flex;align-items:center;gap:16px;padding:20px 28px;border:1px solid rgba(245,242,235,.15);color:var(--bg);text-decoration:none;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.08em;transition:all .25s;background:rgba(255,255,255,.03)}
+.ig-link:hover{border-color:#e1306c;color:#e1306c;background:rgba(225,48,108,.06)}
+.ig-icon{width:40px;height:40px;border-radius:9px;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ig-icon svg{width:20px;height:20px;fill:#fff}
+.ig-handle{font-size:15px;letter-spacing:.05em}
+.ig-sub{font-size:10px;color:rgba(245,242,235,.35);letter-spacing:.12em;text-transform:uppercase;margin-top:3px}
+
+/* FOOTER */
+footer{background:#111008;color:rgba(245,242,235,.3);padding:28px 64px;display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
+.reveal.in{opacity:1;transform:none}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.hero-eyebrow{animation:fadeIn .6s .1s both}
+.hero-name{animation:fadeIn .6s .25s both}
+.hero-bio{animation:fadeIn .6s .4s both}
+.hero-stats{animation:fadeIn .6s .5s both}
+.hero-cta{animation:fadeIn .6s .6s both}
+.hero-right{animation:fadeIn .7s .45s both}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent)}
+
+@media(max-width:960px){
+  nav{padding:14px 24px;flex-wrap:wrap}
+  .nav-links{gap:16px;order:3;width:100%;justify-content:flex-start}
+  .hero{grid-template-columns:1fr;padding:100px 24px 60px;gap:48px}
+  .hero::after{display:none}
+  section{padding:64px 24px}
+  .achievements-grid{grid-template-columns:1fr}
+  .project-row{grid-template-columns:60px 1fr}
+  .project-meta{display:none}
+  .skills-top{grid-template-columns:1fr}
+  .contact-inner{grid-template-columns:1fr;gap:48px}
+  .contact-section{padding:64px 24px}
+  footer{padding:20px 24px;flex-direction:column;gap:8px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Қасымхан <span>Мағжан</span></div>
+  <ul class="nav-links">
+    <li><a href="#achievements" data-i18n="nav_ach"></a></li>
+    <li><a href="#projects"     data-i18n="nav_proj"></a></li>
+    <li><a href="#skills"       data-i18n="nav_skills"></a></li>
+    <li><a href="#contact"      data-i18n="nav_contact"></a></li>
+  </ul>
+  <div class="lang-switcher">
+    <button class="lang-btn" onclick="setLang('kz')">KZ</button>
+    <button class="lang-btn active" onclick="setLang('ru')">RU</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</nav>
+
+<main id="cv">
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow" data-i18n="hero_eyebrow"></div>
+    <h1 class="hero-name">Қасымхан<br><em>Мағжан</em></h1>
+    <p class="hero-bio" data-i18n="hero_bio"></p>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">4</span><span class="stat-label" data-i18n="stat1"></span></div>
+      <div class="stat"><span class="stat-num">12+</span><span class="stat-label" data-i18n="stat2"></span></div>
+      <div class="stat"><span class="stat-num">5+</span><span class="stat-label" data-i18n="stat3"></span></div>
+    </div>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary" data-i18n="cta1"></a>
+      <a href="#contact"  class="btn btn-outline"  data-i18n="cta2"></a>
+      <button type="button" class="btn btn-outline pdf-hide" onclick="downloadPDF()" data-i18n="cta_pdf"></button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-tag-cloud">
+      <span class="htag ai">🤖 AI / ML</span>
+      <span class="htag space">🛰 Space Tech</span>
+      <span class="htag mun">🌍 MUN</span>
+      <span class="htag">Figma</span>
+      <span class="htag">UI/UX</span>
+      <span class="htag">React Native</span>
+      <span class="htag">TypeScript</span>
+      <span class="htag" data-i18n="tag_vol"></span>
+    </div>
+    <blockquote class="hero-quote" data-i18n="quote"></blockquote>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements" class="alt-bg">
+  <div class="section-label" data-i18n="sec_ach_label"></div>
+  <h2 class="section-title" data-i18n="sec_ach_title"></h2>
+  <div class="achievements-grid">
+
+    <div class="ach-item reveal" data-num="01">
+      <span class="ach-badge badge-gold">🥇 <span data-i18n="place1"></span></span>
+      <div class="ach-title" data-i18n="ach1_title"></div>
+      <div class="ach-sub" data-i18n="ach1_sub"></div>
+    </div>
+
+    <div class="ach-item reveal" data-num="02">
+      <span class="ach-badge badge-blue"><span data-i18n="participant"></span></span>
+      <div class="ach-title" data-i18n="ach2_title"></div>
+      <div class="ach-sub" data-i18n="ach2_sub"></div>
+    </div>
+
+    <div class="ach-item reveal" data-num="03">
+      <span class="ach-badge badge-green">Best Position Paper</span>
+      <div class="ach-title">MUN Yurts</div>
+      <div class="ach-sub" data-i18n="ach3_sub"></div>
+    </div>
+
+    <div class="ach-item reveal" data-num="04">
+      <span class="ach-badge badge-silver">🥈 <span data-i18n="place2"></span></span>
+      <div class="ach-title">Maximum <span data-i18n="olympiad"></span></div>
+      <div class="ach-sub" data-i18n="ach4_sub"></div>
+    </div>
+
+    <div class="ach-item reveal" data-num="05">
+      <span class="ach-badge badge-green">Best Volunteer</span>
+      <div class="ach-title">NUMUN'25, OYU Cup, Infinity Cup, Shuaq Cup, REMUN'25</div>
+      <div class="ach-sub" data-i18n="ach5_sub"></div>
+    </div>
+
+    <div class="ach-item reveal" data-num="06">
+      <span class="ach-badge badge-silver">🥈 <span data-i18n="place2"></span></span>
+      <div class="ach-title">Hot Start 2025</div>
+      <div class="ach-sub" data-i18n="ach6_sub"></div>
+    </div>
+
+    <div class="ach-item reveal" data-num="07">
+      <span class="ach-badge badge-green"><span data-i18n="volunteer"></span></span>
+      <div class="ach-title">Integrity Unity / U1REN</div>
+      <div class="ach-sub" data-i18n="ach7_sub"></div>
+    </div>
+
+    <div class="ach-item reveal" data-num="08">
+      <span class="ach-badge badge-blue"><span data-i18n="coordinator"></span></span>
+      <div class="ach-title">HEYMUN'25 &amp; Urpaq Cup'26</div>
+      <div class="ach-sub" data-i18n="ach8_sub"></div>
+    </div>
+
+    <div class="ach-item reveal" data-num="09">
+      <span class="ach-badge badge-silver">🥈 <span data-i18n="place2"></span></span>
+      <div class="ach-title">NEXORA AI Hackathon</div>
+      <div class="ach-sub" data-i18n="ach9_sub"></div>
+    </div>
+
+    <div class="ach-item reveal" data-num="10">
+      <span class="ach-badge badge-blue"><span data-i18n="participant"></span></span>
+      <div class="ach-title">AEROO Space Settlement 2025</div>
+      <div class="ach-sub" data-i18n="ach10_sub"></div>
+    </div>
+
+    <div class="ach-item reveal" data-num="11">
+      <span class="ach-badge badge-red"><span data-i18n="deputy"></span></span>
+      <div class="ach-title" data-i18n="ach11_title"></div>
+      <div class="ach-sub" data-i18n="ach11_sub"></div>
+    </div>
+
+    <div class="ach-item reveal" data-num="12">
+      <span class="ach-badge badge-green"><span data-i18n="finalist"></span></span>
+      <div class="ach-title">AEROO Space AI Competition</div>
+      <div class="ach-sub" data-i18n="ach12_sub"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label" data-i18n="sec_proj_label"></div>
+  <h2 class="section-title" data-i18n="sec_proj_title"></h2>
+  <div class="projects-wrap">
+
+    <div class="project-row reveal">
+      <div class="project-num">01</div>
+      <div class="project-body">
+        <div class="project-title">HandWriting Recognition</div>
+        <p class="project-desc" data-i18n="proj1_desc"></p>
+        <div class="project-stack">
+          <span class="stack-tag ai-tag">Python</span>
+          <span class="stack-tag ai-tag">Computer Vision</span>
+          <span class="stack-tag ai-tag">OCR</span>
+          <span class="stack-tag">Jupyter Notebook</span>
+          <span class="stack-tag">OpenCV</span>
+        </div>
+      </div>
+      <div class="project-meta">
+        <div class="project-icon">✍️</div>
+        <div class="project-type">Computer Vision<br>ML Model</div>
+      </div>
+    </div>
+
+    <div class="project-row reveal">
+      <div class="project-num">02</div>
+      <div class="project-body">
+        <div class="project-title">Pet Emotion Recognition</div>
+        <p class="project-desc" data-i18n="proj2_desc"></p>
+        <div class="project-stack">
+          <span class="stack-tag ai-tag">Python</span>
+          <span class="stack-tag ai-tag">CNN</span>
+          <span class="stack-tag ai-tag">Audio ML</span>
+          <span class="stack-tag">Jupyter Notebook</span>
+          <span class="stack-tag">TensorFlow</span>
+        </div>
+      </div>
+      <div class="project-meta">
+        <div class="project-icon">🐾</div>
+        <div class="project-type">Multimodal AI<br>Vision + Audio</div>
+      </div>
+    </div>
+
+    <div class="project-row reveal">
+      <div class="project-num">03</div>
+      <div class="project-body">
+        <div class="project-title">CalmSpace</div>
+        <p class="project-desc" data-i18n="proj3_desc"></p>
+        <div class="project-stack">
+          <span class="stack-tag mobile-tag">React Native</span>
+          <span class="stack-tag mobile-tag">TypeScript</span>
+          <span class="stack-tag mobile-tag">Firebase</span>
+          <span class="stack-tag ai-tag">LLM / AI Chat</span>
+        </div>
+      </div>
+      <div class="project-meta">
+        <div class="project-icon">🧘</div>
+        <div class="project-type">Mobile App<br>Mental Health AI</div>
+      </div>
+    </div>
+
+    <div class="project-row reveal">
+      <div class="project-num">04</div>
+      <div class="project-body">
+        <div class="project-title">Helios Guard</div>
+        <p class="project-desc" data-i18n="proj4_desc"></p>
+        <div class="project-stack">
+          <span class="stack-tag space-tag">Space Tech</span>
+          <span class="stack-tag space-tag">Satellite Systems</span>
+          <span class="stack-tag ai-tag">Python</span>
+          <span class="stack-tag ai-tag">Anomaly Detection</span>
+          <span class="stack-tag">MVP</span>
+        </div>
+      </div>
+      <div class="project-meta">
+        <div class="project-icon">🛡️</div>
+        <div class="project-type">Space + AI<br>MVP System</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="alt-bg">
+  <div class="section-label" data-i18n="sec_skills_label"></div>
+  <h2 class="section-title" data-i18n="sec_skills_title"></h2>
+
+  <div class="skills-top">
+
+    <!-- Frontend -->
+    <div>
+      <div class="skills-col-title" data-i18n="skills_frontend"></div>
+      <div class="skill-chip reveal"><div class="skill-icon">🌐</div>HTML</div>
+      <div class="skill-chip reveal"><div class="skill-icon">🔷</div>TypeScript</div>
+      <div class="skill-chip reveal"><div class="skill-icon">🎨</div>CSS</div>
+    </div>
+
+    <!-- Design -->
+    <div>
+      <div class="skills-col-title" data-i18n="skills_design"></div>
+      <div class="skill-chip reveal"><div class="skill-icon">🖌️</div>UI/UX Design</div>
+      <div class="skill-chip reveal"><div class="skill-icon">⬡</div>Figma</div>
+      <div class="skill-chip reveal"><div class="skill-icon">📐</div>SketchUp</div>
+    </div>
+
+    <!-- Tools -->
+    <div>
+      <div class="skills-col-title" data-i18n="skills_tools"></div>
+      <div class="skill-chip reveal"><div class="skill-icon">🌿</div>Git</div>
+      <div class="skill-chip reveal"><div class="skill-icon">🐈</div>GitHub</div>
+      <div class="skill-chip reveal"><div class="skill-icon">🟩</div>Node.js</div>
+      <div class="skill-chip reveal"><div class="skill-icon">⚡</div>Cursor</div>
+    </div>
+
+  </div>
+
+  <!-- Soft skills -->
+  <div>
+    <div class="skills-col-title" data-i18n="skills_soft"></div>
+    <ul class="activity-list">
+      <li class="activity-item reveal"><div class="activity-dot"></div><span data-i18n="soft1"></span></li>
+      <li class="activity-item reveal"><div class="activity-dot"></div><span data-i18n="soft2"></span></li>
+      <li class="activity-item reveal"><div class="activity-dot"></div><span data-i18n="soft3"></span></li>
+      <li class="activity-item reveal"><div class="activity-dot"></div><span data-i18n="soft4"></span></li>
+      <li class="activity-item reveal"><div class="activity-dot"></div><span data-i18n="soft5"></span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="section-label" data-i18n="sec_contact_label"></div>
+  <div class="contact-inner">
+    <div class="contact-big" data-i18n="contact_big"></div>
+    <div>
+      <p class="contact-text" data-i18n="contact_text"></p>
+      <a href="https://instagram.com/magiistr" target="_blank" class="ig-link">
+        <div class="ig-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="ig-handle">magiistr</div>
+          <div class="ig-sub">Instagram</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Қасымхан Мағжан · 10В · Туркестан</span>
+  
+</footer>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+<script>
+// ── TRANSLATIONS ─────────────────────────────────────────────────
+const T = {
+  kz: {
+    nav_ach:"Жетістіктер", nav_proj:"Жобалар", nav_skills:"Дағдылар", nav_contact:"Байланыс",
+    hero_eyebrow:"10В сынып · Туркестан · 2026",
+    hero_bio:"Қарапайым оқушы",
+    stat1:"AI жобасы", stat2:"Жетістік", stat3:"MUN конф.",
+    cta1:"Жобаларды қарау →", cta2:"Байланысу",
+    cta_pdf:"PDF жүктеу",
+    tag_vol:"Волонтёрлік",
+    quote:"Технология - бұл құрал.\nОны кімге және не үшін беретінің маңызды - Стив Джобс.",
+    sec_ach_label:"Жетістіктер", sec_ach_title:"Марапаттар & Белсенділік",
+    place1:"1 орын", place2:"2 орын", participant:"Қатысушы", volunteer:"Волонтёр",
+    coordinator:"Координатор", deputy:"Депутат", finalist:"Финалист", olympiad:"Олимпиадасы",
+    ach1_title:"Мектепшілік информатика олимпиадасы", ach1_sub:"8 сынып · Алматы",
+    ach2_title:"Информатика желілік деңгей олимпиадасы", ach2_sub:"Республикалық деңгей",
+    ach3_sub:"Дипломатия · Ең үздік дайындық",
+    ach4_sub:"Математика / Информатика",
+    ach5_sub:"5 конференция · Волонтёр үздігі",
+    ach6_sub:"Стартап / бизнес-идея байқауы",
+    ach7_sub:"Ұйым волонтері",
+    ach8_sub:"Волонтёр командасының координаторы",
+    ach9_sub:"Жасанды интеллект · Командалық жоба",
+    ach10_sub:"+· GenerativeX'26 · Eco Business Case'26",
+    ach11_title:"Өзін-өзі басқару - Білім депутаты", ach11_sub:"Мектеп студенттік үкіметі",
+    ach12_sub:"+ Atomic Heart FTC ",
+    sec_proj_label:"Жобалар", sec_proj_title:"AI Жобалары",
+    proj1_desc:"Фотосурет арқылы қолжазба мәтінді автоматты түрде тану жүйесі.",
+    proj2_desc:"Фото немесе аудио арқылы үй жануарының эмоциясын анықтайтын мультимодальды жүйе.",
+    proj3_desc:"Жеке AI-психолог мобильді қосымша. Психологиялық қолдау, медитация және стрессті бақылау.",
+    proj4_desc:"Күн дауылдары мен ғарыш ауа-райынан спутниктерді қорғауға арналған MVP-жүйе. Анықтау, талдау және қорғаныс маневрі.",
+    sec_skills_label:"Дағдылар", sec_skills_title:"Техникалық & Soft Skills",
+    skills_frontend:"Frontend Разработка", skills_design:"Дизайн", skills_tools:"Инструменттер & Технологиялар",
+    skills_soft:"Белсенділік & Лидерлік",
+    soft1:"MUN конференцияларында 5+ рет Best Volunteer, 1 рет Best Position Paper",
+    soft2:"HEYMUN'25 және Urpaq Cup'26 - волонтёр командасын координациялау",
+    soft3:"Мектеп өзін-өзі басқару - Білім депутаты",
+    soft4:"Integrity Unity / U1REN ұйымы - қоғамдық бастамалар",
+    soft5:"Қазақша · Орысша · Ағылшынша - үш тілде еркін",
+    sec_contact_label:"Байланыс",
+    contact_big:"Жаңа <em>мүмкіндіктер</em> іздеудемін",
+    contact_text:""
+  },
+  ru: {
+    nav_ach:"Достижения", nav_proj:"Проекты", nav_skills:"Навыки", nav_contact:"Связь",
+    hero_eyebrow:"10В класс · Туркестан· 2026",
+    hero_bio:"Простой Ученик",
+    stat1:"AI проекта", stat2:"Достижений", stat3:"MUN конф.",
+    cta1:"Смотреть проекты →", cta2:"Написать",
+    cta_pdf:"Скачать PDF",
+    tag_vol:"Волонтёрство",
+    quote:"Технологии - это инструмент.\nВажно кому и зачем ты их даёшь. - Стив Джобс",
+    sec_ach_label:"Достижения", sec_ach_title:"Награды & Активности",
+    place1:"1 место", place2:"2 место", participant:"Участник", volunteer:"Волонтёр",
+    coordinator:"Координатор", deputy:"Депутат", finalist:"Финалист", olympiad:"Олимпиада",
+    ach1_title:"Школьная олимпиада по информатике", ach1_sub:"8 класс · Алматы",
+    ach2_title:"Сетевая олимпиада по информатике", ach2_sub:"Республиканский уровень",
+    ach3_sub:"Дипломатия · Лучшая позиционная работа",
+    ach4_sub:"Математика / Информатика",
+    ach5_sub:"5 конференций · Лучший волонтёр",
+    ach6_sub:"Стартап / конкурс бизнес-идей",
+    ach7_sub:"Волонтёр организации",
+    ach8_sub:"Координатор команды волонтёров",
+    ach9_sub:"Искусственный интеллект · Командный проект",
+    ach10_sub:"+ · GenerativeX'26 · Eco Business Case'26",
+    ach11_title:"Самоуправление - Депутат отдела образования", ach11_sub:"Школьный студенческий совет",
+    ach12_sub:"+ Atomic Heart FTC ",
+    sec_proj_label:"Проекты", sec_proj_title:"AI Проекты",
+    proj1_desc:"Система автоматического распознавания рукописного текста по фотографии.",
+    proj2_desc:"Мультимодальная система определения эмоций питомца по фото или аудио. Распознаёт настроение собак и кошек в реальном времени.",
+    proj3_desc:"Мобильное приложение - личный AI-психолог. Психологическая поддержка, медитации и отслеживание стресса каждый день.",
+    proj4_desc:"MVP система защиты спутников от солнечных бурь и космической погоды. Полный цикл: обнаружение, анализ, защитный манёвр.",
+    sec_skills_label:"Навыки", sec_skills_title:"Технические & Soft Skills",
+    skills_frontend:"Frontend Разработка", skills_design:"Дизайн", skills_tools:"Инструменты & Технологии",
+    skills_soft:"Активности & Лидерство",
+    soft1:"5+ конференций MUN: Best Volunteer, Best Position Paper - дипломатическая речь и аналитика",
+    soft2:"HEYMUN'25 и Urpaq Cup'26 - координация команды волонтёров",
+    soft3:"Школьное самоуправление - Депутат отдела образования",
+    soft4:"Integrity Unity / U1REN - общественные инициативы и волонтёрство",
+    soft5:"Казахский · Русский · Английский - свободно на трёх языках",
+    sec_contact_label:"Связь",
+    contact_big:"Ищу новые <em>возможности</em>",
+    contact_text:""
+  },
+  en: {
+    nav_ach:"Achievements", nav_proj:"Projects", nav_skills:"Skills", nav_contact:"Contact",
+    hero_eyebrow:"Grade 10B · Turkestan · 2026",
+    hero_bio:"Simple student.",
+    stat1:"AI projects", stat2:"Achievements", stat3:"MUN conf.",
+    cta1:"View projects →", cta2:"Get in touch",
+    cta_pdf:"Download PDF",
+    tag_vol:"Volunteering",
+    quote:"Technology is just a tool.\nWhat matters is who you give it to and why. -Steve Jobs",
+    sec_ach_label:"Achievements", sec_ach_title:"Awards & Activities",
+    place1:"1st place", place2:"2nd place", participant:"Participant", volunteer:"Volunteer",
+    coordinator:"Coordinator", deputy:"Deputy", finalist:"Finalist", olympiad:"Olympiad",
+    ach1_title:"School Informatics Olympiad", ach1_sub:"Grade 8 · Almaty",
+    ach2_title:"Network-level Informatics Olympiad", ach2_sub:"National level",
+    ach3_sub:"Diplomacy · Best position paper",
+    ach4_sub:"Math / Informatics",
+    ach5_sub:"5 conferences · Best Volunteer award",
+    ach6_sub:"Startup / business idea competition",
+    ach7_sub:"Organisation volunteer",
+    ach8_sub:"Volunteer team coordinator",
+    ach9_sub:"Artificial Intelligence · Team project",
+    ach10_sub:"+ · GenerativeX'26 · Eco Business Case'26",
+    ach11_title:"Student Government - Education Deputy", ach11_sub:"School student council",
+    ach12_sub:"+ Atomic Heart FTC ",
+    sec_proj_label:"Projects", sec_proj_title:"AI Projects",
+    proj1_desc:"Automatic handwritten text recognition system from photos. ",
+    proj2_desc:"Multimodal system that detects a pet's emotion from photo or audio. Recognises dogs and cats' mood in real time.",
+    proj3_desc:"Mobile app - your personal AI psychologist. Daily psychological support, meditation sessions and stress tracking.",
+    proj4_desc:"MVP system protecting satellites from solar storms and space weather. Full cycle: detection, analysis, protective manoeuvre.",
+    sec_skills_label:"Skills", sec_skills_title:"Technical & Soft Skills",
+    skills_frontend:"Frontend Development", skills_design:"Design", skills_tools:"Tools & Technologies",
+    skills_soft:"Activities & Leadership",
+    soft1:"5+ MUN conferences: Best Volunteer, Best Position Paper - diplomatic speaking & analytical writing",
+    soft2:"HEYMUN'25 & Urpaq Cup'26 - coordinating 20+ volunteer team",
+    soft3:"School Student Government - Education Deputy",
+    soft4:"Integrity Unity / U1REN - civic initiatives and volunteering",
+    soft5:"Kazakh · Russian · English - fluent in three languages",
+    sec_contact_label:"Contact",
+    contact_big:"Looking for new <em>opportunities</em>",
+    contact_text:""
+  }
+};
+
+let currentLang = 'ru';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase() === lang));
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (T[lang][key] !== undefined) el.innerHTML = T[lang][key];
+  });
+  document.documentElement.lang = lang === 'kz' ? 'kz' : lang === 'en' ? 'en' : 'ru';
+}
+
+async function downloadPDF() {
+  const el = document.getElementById('cv');
+  if (!el || typeof html2pdf === 'undefined') return;
+
+  const fileName = `Kassymkhan_Magzhan_CV_${(currentLang || 'ru').toUpperCase()}.pdf`;
+  document.body.classList.add('pdf-mode');
+  try {
+    await html2pdf()
+      .set({
+        margin: [10, 10, 10, 10],
+        filename: fileName,
+        image: { type: 'jpeg', quality: 0.95 },
+        html2canvas: { scale: 2, useCORS: true, backgroundColor: '#f5f2eb' },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: ['css', 'legacy'] }
+      })
+      .from(el)
+      .save();
+  } finally {
+    document.body.classList.remove('pdf-mode');
+  }
+}
+
+// init
+setLang('ru');
+
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('in'), ([...revealEls].indexOf(entry.target) % 5) * 70);
+      obs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
+revealEls.forEach(el => obs.observe(el));
+
+// Active nav link
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) cur = s.id; });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+  });
+});
+</script>
+</body>
+</html>
